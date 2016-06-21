@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Inchoo_Onsale>
+            <version>1.0.0.3</version>
+        </Inchoo_Onsale>
+    </modules>
+    <global>
+        <blocks>
+            <inchoo_onsale>
+                <class>Inchoo_Onsale_Block</class>
+            </inchoo_onsale>
+        </blocks>
+        <helpers>
+            <inchoo_onsale>
+                <class>Inchoo_Onsale_Helper</class>
+            </inchoo_onsale>
+        </helpers>
+        <models>
+            <inchoo_onsale>
+                <class>Inchoo_Onsale_Model</class>
+            </inchoo_onsale>
+        </models>
+    </global>
+    <frontend>
+        <layout>
+            <updates>
+                <onsale>
+                    <file>inchoo/onsale.xml</file>
+                </onsale>
+            </updates>
+        </layout>
+    </frontend>
+</config>

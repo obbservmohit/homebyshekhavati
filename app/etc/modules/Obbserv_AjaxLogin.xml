@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Obbserv_AjaxLogin>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Obbserv_AjaxLogin>
+    </modules>
+</config>

@@ -1,0 +1,221 @@
+<!-- Sign up Pop-up -->
+                <div class="modal fade" id="myModalSignup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                  <div class="modal-dialog popup-position" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header no-padding">
+                        <img width="100%" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN); ?>frontend/default/joal/images/pop-up.jpg" alt="signup-popup" />
+                        <button type="button" class="close popup-signup-close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <div class="text-center font-family-avant popup-sign-div">
+                            <form  action="javascript:void(0);" method="post" id="ajaxlogin-create-form" class="form-inline">
+                                <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12 popup-signup-margin">
+                                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 signup-men-btn-div responsive-margin-bottom-15">
+                                        <?php echo $this->getChildHtml('inchoo_socialconnect_facebook_login_button'); ?>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 signup-women-btn-div">
+                                        <?php echo $this->getChildHtml('inchoo_socialconnect_google_login_button'); ?>
+                                    </div>
+                                </div>
+                                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center margin-top-15">
+                                    <p class="signin-or-text"><?php echo $this->__("OR") ?></p>
+                                 </div>
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center collec-p-title-div">
+                                    <h2 class="collection-page-title popup-signup-title"><?php echo $this->__("SIGN UP") ?></h2>
+                                    <p class="collec-p-dis popup-signup-already"><?php echo $this->__("ALREADY REGISTERED?") ?> <a href="#" data-toggle="modal" data-dismiss="modal" data-target="#myModalLogin"><?php echo $this->__("LOGIN") ?></a></p>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center " id="create-error" style="display:none;">
+                                    <p class="collec-p-dis popup-signup-already popup-error-msg"></p>
+                                </div>
+                                <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12 popup-signup-margin">
+                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 signup-men-btn-div responsive-margin-bottom-15">
+                                            <input type="text" name="firstname" class="required-entry popup-input-field form-control responsive-input-width signin-responsive-border-color form-input-dimension popup-signup-field-height" id="firstname" placeholder="<?php echo $this->__("Enter your name") ?>">
+                                    </div>
+                                </div>
+                                <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12 popup-signup-margin">
+                                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 signup-women-btn-div">                             
+                                            <input type="text" name="email" class="validate-email required-entry popup-input-field form-control responsive-input-width signin-responsive-border-color form-input-dimension popup-signup-field-height" id="email_address" placeholder="<?php echo $this->__("Enter your email address") ?>">
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 signup-men-btn-div responsive-margin-bottom-15">
+                                            <input type="password" name="password" class="required-entry popup-input-field form-control responsive-input-width signin-responsive-border-color form-input-dimension popup-signup-field-height" id="password" placeholder="<?php echo $this->__("Enter password") ?>">
+                                    </div>
+                                </div>
+                                  <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12 margin-top-20  ">
+                                      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 signin-btn-div">
+                                        <button type="submit" class="btn btn-primary signup-btn"><?php echo $this->__("SIGN UP") ?></button>
+                                      </div>
+                                 </div>
+                            </form>
+                            <script type="text/javascript">
+                            //<![CDATA[
+                                var ajaxCreateForm = new VarienForm('ajaxlogin-create-form', true);
+                                $createAjax = jQuery.noConflict();     
+                                $createAjax("#ajaxlogin-create-form").submit(function(e) {
+                                    // If validation is checked then only run ajax
+                                    if (ajaxCreateForm.validator && ajaxCreateForm.validator.validate()) {
+                                        $createAjax.ajax({
+                                            type: "POST",
+                                            url: "<?php echo $this->getUrl('ajaxlogin/index/create', array('_secure'=>(!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS']==='on'))) ?>",
+                                            data: $createAjax("#ajaxlogin-create-form").serialize(),
+                                            success:  function(data){
+                                                var obj = jQuery.parseJSON(data);
+                                                if(obj.success == true) {
+                                                    location.reload();
+                                                }
+                                                if(obj.success == false) {
+                                                    $createAjax("#create-error p").html(obj.error);
+                                                    $createAjax("#create-error").show();
+                                                }
+                                            }
+                                        });
+                                    }
+                                });
+                            //]]>
+                            </script>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Sign up Pop-up -->
+
+                <!-- Log In Pop-up -->
+                <div class="modal fade" id="myModalLogin" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                  <div class="modal-dialog popup-position" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header no-padding">
+                        <img width="100%" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN); ?>frontend/default/joal/images/pop-up.jpg"  alt="signup-popup" />
+                        <button type="button" class="close popup-signup-close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <div class="text-center font-family-avant popup-sign-div">
+                            <form class="form-inline" action="javascript:void(0);" method="post" id="ajaxlogin-login-form">
+                                <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12 popup-signup-margin">
+                                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 signup-men-btn-div responsive-margin-bottom-15">
+                                        <?php echo $this->getChildHtml('inchoo_socialconnect_facebook_login_button'); ?>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 signup-women-btn-div">
+                                        <?php echo $this->getChildHtml('inchoo_socialconnect_google_login_button'); ?>
+                                    </div>
+                                </div>
+                                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center margin-top-15">
+                                    <p class="signin-or-text"><?php echo $this->__("OR") ?></p>
+                                 </div>
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center collec-p-title-div">
+                                    <h2 class="collection-page-title popup-signup-title"><?php echo $this->__("LOG IN") ?></h2>
+                                    <p class="collec-p-dis popup-signup-already"><?php echo $this->__("NOT REGISTERED?") ?> <a href="javascript:void(0)" data-toggle="modal" data-dismiss="modal" data-target="#myModalSignup"><?php echo $this->__("SIGN UP") ?></a></p>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center " id="login-error" style="display:none;">
+                                    <p class="collec-p-dis popup-signup-already popup-error-msg"><?php echo $this->__('Invalid login or password') ?></p>
+                                </div>
+                                <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12 popup-signup-margin">
+                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 signup-women-btn-div">
+                                            <input type="text" name="login[username]" class="required-entry validate-email popup-input-field form-control responsive-input-width signin-responsive-border-color form-input-dimension popup-signup-field-height" id="exampleInputAmount" placeholder="<?php echo $this->__("Enter your email address") ?>">
+                                    </div>
+                                </div>
+                                <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12 popup-signup-margin">
+                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 signup-men-btn-div responsive-margin-bottom-15">
+                                            <input type="password" name="login[password]" class="required-entry validate-password popup-input-field form-control responsive-input-width signin-responsive-border-color form-input-dimension popup-signup-field-height" id="exampleInputAmount" placeholder="<?php echo $this->__("Enter password") ?>">
+                                    </div>
+                                </div>
+                                <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12 margin-top-20">
+                                      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 signin-btn-div">
+                                        <button type="submit" class="btn btn-primary signup-btn"><?php echo $this->__("LOG IN") ?></button>
+                                      </div>
+                                 </div>
+                                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center popup-signup-margin">
+                                    <p class="signin-forgot-btn no-margin-bottom"><a href="javascript:void(0)" data-toggle="modal" data-dismiss="modal" data-target="#myModalforgotpass"><?php echo $this->__("Forgot Password") ?></a></p>
+                                 </div>
+                            </form>
+                            <script type="text/javascript">
+                            //<![CDATA[
+                                var ajaxLoginForm = new VarienForm('ajaxlogin-login-form', true);
+                                $loginAjax = jQuery.noConflict();     
+                                $loginAjax("#ajaxlogin-login-form").submit(function(e) {
+                                    // If validation is checked then only run ajax
+                                    if (ajaxLoginForm.validator && ajaxLoginForm.validator.validate()) {
+                                        $loginAjax.ajax({
+                                            type: "POST",
+                                            url: "<?php echo $this->getUrl('ajaxlogin/index/login', array('_secure'=>(!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS']==='on'))) ?>",
+                                            data: $loginAjax("#ajaxlogin-login-form").serialize(),
+                                            success:  function(data){
+                                                var obj = jQuery.parseJSON(data);
+                                                if(obj.success == true) {
+                                                    location.reload();
+                                                }
+                                                if(obj.success == false) {
+                                                    $loginAjax("#login-error").show();
+                                                }
+                                            }
+                                        });
+                                    }
+                                }); 
+                            //]]>
+                            </script>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Log In Pop-up -->
+
+                <!-- Forgot password Pop-up -->
+                <div class="modal fade" id="myModalforgotpass" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                  <div class="modal-dialog popup-position forgotpass-popup-modal" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header no-padding">
+                        <button type="button" class="close popup-signup-close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <div class="text-center font-family-avant popup-sign-div forgotpass-popup-padding">
+                            <form class="form-inline" action="javascript:void(0);" method="post" id="ajaxlogin-forgot-form">
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center collec-p-title-div">
+                                    <h2 class="collection-page-title popup-signup-title forgotpass-popup-title"><?php echo $this->__('FORGOT PASSWORD?') ?></h2>
+                                    <p class="collec-p-dis popup-signup-already"><?php echo $this->__('Please enter your email address below. You will receive a link to reset your password.') ?></p>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center " id="forgot-error" style="display:none;">
+                                    <p class="collec-p-dis popup-signup-already popup-error-msg"></p>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center " id="forgot-success" style="display:none;">
+                                    <p class="collec-p-dis popup-signup-already popup-success-msg"></p>
+                                </div>
+                                <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12 popup-signup-margin">
+                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 signup-women-btn-div">
+                                            <input type="text" id="email_address" alt="email" name="email" class="required-entry validate-email popup-input-field form-control responsive-input-width signin-responsive-border-color form-input-dimension popup-signup-field-height" placeholder="Enter your email address">
+                                    </div>
+                                </div>
+                                <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12 margin-top-20">
+                                      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 signin-btn-div">
+                                        <button type="submit" class="btn btn-primary signup-btn"><?php echo $this->__('SUBMIT') ?></button>
+                                      </div>
+                                 </div>
+                            </form>
+                            <script type="text/javascript">
+                            //<![CDATA[
+                                var ajaxForgotForm = new VarienForm('ajaxlogin-forgot-form', true);
+                                $forgotAjax = jQuery.noConflict();     
+                                $forgotAjax("#ajaxlogin-forgot-form").submit(function(e) {
+                                    // If validation is checked then only run ajax
+                                    if (ajaxForgotForm.validator && ajaxForgotForm.validator.validate()) {
+                                        $forgotAjax.ajax({
+                                            type: "POST",
+                                            url: "<?php echo $this->getUrl('ajaxlogin/index/forgotpassword', array('_secure'=>(!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS']==='on'))) ?>",
+                                            data: $forgotAjax("#ajaxlogin-forgot-form").serialize(),
+                                            success:  function(data){
+                                                var obj = jQuery.parseJSON(data);
+                                                if(obj.success == true) {
+                                                    $forgotAjax("#forgot-success p").html(obj.message);
+                                                    $forgotAjax("#forgot-success").show();
+                                                    $forgotAjax("#forgot-error").hide();
+                                                }
+                                                if(obj.success == false) {
+                                                    $forgotAjax("#forgot-error p").html(obj.message);
+                                                    $forgotAjax("#forgot-error").show();
+                                                    $forgotAjax("#forgot-success").hide();
+                                                }
+                                            }
+                                        });
+                                    }
+                                }); 
+                            //]]>
+                            </script>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Forgot password Pop-up -->
